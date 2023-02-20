@@ -1,5 +1,7 @@
 const arr = [1, 2, 3, 4, 5];
+arr.length = 100;
 
+// console.log("Result:",result);
 // create myReduce
 // Array.prototype.myReduce = function(callback,result) {
 //     let i = 0;
@@ -19,107 +21,114 @@ const arr = [1, 2, 3, 4, 5];
 // console.log(output);
 
 // create myMap
-// Array.prototype.myMap = function(callback) {
+// Array.prototype.myMap = function (callback) {
 //   let arrLength = this.length;
 //   let newArr = [];
-//   for( let i = 0; i < this.length; i++) {
-//     result = callback(this[i], i,this);
-//     new Promise((resolve, reject) => {
+//   for (let i in this) {
+//     if (this.hasOwnProperty(i)) {
+//       result = callback(this[i], i, this);
 //       newArr.push(result);
-//     })
+//     }
 //   }
 //   return newArr;
-// }
-// const output = arr.myMap((number,index,originalArray) => {
+// };
+// const output = arr.myMap((number, index, originalArray) => {
 //   console.log(originalArray);
-//   return number*2;
-// })
+//   return number * 2;
+// });
 // console.log(output);
 
 // create myForEach
 // Array.prototype.myForEach = function(callback) {
-//   let arrLength = this.length;
-//   for ( let i = 0; i < arrLength; i++ ) {
-//     callback(this[i], i );
+//   for ( let i in this ) {
+//     if(this.hasOwnProperty(i)) {
+//         callback(this[i], i, this);
+//     }
 //   }
 // }
 // arr.myForEach((number,index) => {
 // })
+// arr.myForEach((item,index,originalArray) => {
+//     console.log(item);
+//     console.log(index);
+//     console.log(originalArray);
 
-// create myEvery
-// Array.prototype.myEvery = function(callback) {
-//     let arrLength = this.length;
-//     let result = true;
-//     for( let i = 0;  i < this.length; i++) {
-//        result = callback(this[i], i, this);
-//         if (!result) return result;
-//     }
-//     return result;
-// }
-// const result = arr.myEvery((number,index,originalArray) => {
-//     return number > 0;
 // })
+// create myEvery
+// Array.prototype.myEvery = function (callback) {
+//   let result = true;
+//   for (i in this) {
+//     if (this.hasOwnProperty(i)) {
+//       result = callback(this[i], i, this);
+//       if (!result) return result;
+//     }
+//   }
+//   return result;
+// };
+// const result = arr.myEvery((number, index, originalArray) => {
+//   return number > 0;
+// });
 
 // create mySome
 // Array.prototype.mySome = function (callback) {
-//   let arrLength = this.length;
 //   let result = false;
-//   for( let i = 0; i < arrLength; i++) {
-//     result = callback(this[i],i);
-//     if(result) return result;
+//   for (let i in this) {
+//     if (this.hasOwnProperty(i)) {
+//       result = callback(this[i], i);
+//       if (result) return result;
+//     }
 //   }
 //   return result;
 // };
 
-// const result = arr.mySome((number,index) => {
-//     return number > 8;
-// })
+// const result = arr.mySome((number, index) => {
+//   return number > 1;
+// });
 // console.log(result);
 
 // create find;
-// Array.prototype.myFind = function(callback,startIndex) {
-//     let arrLength = this.length;
-//     let i = 0;
-//     let result = undefined;
-//     for( i; i < arrLength; i++) {
-//        result = callback(this[i],i)
-//        if(result) return this[i];
+// Array.prototype.myFind = function (callback, startIndex) {
+//   let i = 0;
+//   let result = undefined;
+//   for (i in this) {
+//     if (this.hasOwnProperty(i)) {
+//       result = callback(this[i], i);
+//       if (result) return this[i];
 //     }
-//     return result
-// }
+//   }
+//   return result;
+// };
 
 // const course = [
-//     {
-//         id: 1,
-//         name: "HTML,CSS"
-//     },
-//     {
-//         id: 2,
-//         name: "JavaScript"
-//     }
-// ]
-// const result = course.myFind((item,index) => {
-//     console.log(index);
-//     return item.name === "JavaScript";
-// })
+//   {
+//     id: 1,
+//     name: "HTML,CSS",
+//   },
+//   {
+//     id: 2,
+//     name: "JavaScript",
+//   },
+// ];
+// const result = course.myFind((item, index) => {
+//   console.log(index);
+//   return item.name === "JavaScript";
+// });
 
 // create myFilter
-Array.prototype.myFilter = function(callback) {
-  let arrLength = this.length;
+Array.prototype.myFilter = function (callback) {
   let newArr = [];
   let result = false;
-  for(let i = 0; i < arrLength; i++) {
-    result = callback(this[i],i);
-    if(result) {
-      newArr.push(this[i]);
+  for (let i in this) {
+    if (this.hasOwnProperty(i)) {
+      result = callback(this[i], i);
+      if (result) {
+        newArr.push(this[i]);
+      }
     }
   }
   return newArr;
-}
-const result = arr.myFilter((item,index) => {
-    return item > 8;
-})
-
+};
+const result = arr.myFilter((item, index) => {
+  return item > 8;
+});
 console.log(result);
-
-
